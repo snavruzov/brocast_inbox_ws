@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="3.0"
+         xmlns="http://java.sun.com/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="
+    http://java.sun.com/xml/ns/javaee
+    http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
+
+    <description>Atmosphere REST Chat</description>
+    <display-name>Atmosphere REST Chat</display-name>
+    <servlet>
+        <description>AtmosphereServlet</description>
+        <servlet-name>AtmosphereServlet</servlet-name>
+        <servlet-class>org.atmosphere.cpr.AtmosphereServlet</servlet-class>
+        <init-param>
+            <param-name>com.sun.jersey.config.property.packages</param-name>
+            <param-value>com.brocast.rest.inbox.ws.runtime</param-value>
+        </init-param>
+        <init-param>
+            <param-name>org.atmosphere.websocket.messageContentType</param-name>
+            <param-value>application/json</param-value>
+        </init-param>
+        <init-param>
+            <param-name>org.atmosphere.websocket.maxIdleTime</param-name>
+            <param-value>100000</param-value>
+        </init-param>
+        <init-param>
+            <param-name>org.atmosphere.cpr.Broadcaster.supportOutOfOrderBroadcast</param-name>
+            <param-value>true</param-value>
+        </init-param>
+        <init-param>
+            <param-name>org.atmosphere.cpr.AtmosphereInterceptor</param-name>
+            <param-value>org.atmosphere.interceptor.HeartbeatInterceptor</param-value>
+        </init-param>
+        <init-param>
+            <param-name>org.atmosphere.interceptor.HeartbeatInterceptor.heartbeatFrequencyInSeconds</param-name>
+            <param-value>3</param-value>
+        </init-param>
+        <init-param>
+            <param-name>org.atmosphere.cpr.broadcaster.shareableThreadPool</param-name>
+            <param-value>true</param-value>
+        </init-param>
+        <init-param>
+            <param-name>org.atmosphere.cpr.broadcaster.maxProcessingThreads</param-name>
+            <param-value>200</param-value>
+        </init-param>
+        <init-param>
+            <param-name>org.atmosphere.cpr.broadcaster.maxAsyncWriteThreads</param-name>
+            <param-value>200</param-value>
+        </init-param>
+        <load-on-startup>0</load-on-startup>
+        <async-supported>true</async-supported>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AtmosphereServlet</servlet-name>
+        <url-pattern>/inbox/*</url-pattern>
+    </servlet-mapping>
+</web-app>
